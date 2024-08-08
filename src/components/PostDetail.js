@@ -5,10 +5,15 @@ import { useParams } from 'react-router-dom';
 const PostDetail = () => {
   const { id } = useParams();
   const [post, setPost] = useState(null);
+  const token = localStorage.getItem("accessToken");
 
   useEffect(() => {
-    axios.get(`/api/posts/${id}`)
-      .then(response => setPost(response.data))
+    axios.get(`http://localhost:8080/api/posts/${id}`, {
+      headers: {
+          'Authorization': 'Bearer '.concat(token)
+      }
+  })
+      .then(response => setPost(response.data.data))
       .catch(error => console.error(error));
   }, [id]);
 

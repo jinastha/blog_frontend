@@ -14,7 +14,7 @@ const UserProfile = () => {
 
   const handleUpdateProfile = () => {
     axios.put('/api/profile', user)
-      .then(response => history.push('/'))
+      .then(response => history('/'))
       .catch(error => console.error(error));
   };
 

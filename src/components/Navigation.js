@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-const Home = () => {
+
+const Navigation = () => {
   const [posts, setPosts] = useState([]);
   const token = localStorage.getItem("accessToken");
   // console.log(token);
@@ -17,18 +18,18 @@ const Home = () => {
       .catch(error => console.error(error));
   }, []);
 
-  return (
-    <div>
-      <h1>Blog Posts</h1>
-      <ul>
-        {posts.map(post => (
-          <li key={post.id}>
-            <Link to={`http://localhost:8080/api/post/${post.id}`}>{post.name}</Link>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+
+    return (
+        <nav>
+            <ul>
+                <li><Link to="/">Home</Link></li>
+                <li><Link to="/register">User Register</Link></li>
+                <li><Link to="/categories">Category</Link></li>
+                <li><Link to="/tags">Tag</Link></li>
+                <li><Link to="/posts">Posts</Link></li>
+            </ul>
+        </nav>
+    );
 };
 
-export default Home;
+export default Navigation;

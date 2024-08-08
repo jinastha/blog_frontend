@@ -8,12 +8,13 @@ const Login = () => {
   const history = useNavigate();
 
   const handleLogin = () => {
-    axios.post('/api/user/account/v1/users/login', { username, password })
+    axios.post('http://localhost:8080/api/user/account/v1/users/login', { username, password })
       .then(response => {
         // Save token to local storage or state
-        localStorage.setItem("accessToken", response.access_token);
+        localStorage.setItem("accessToken", response.data.access_token);
         
-        history.push('/home');
+        history('/home');
+        // history('/navigation');
       })
       .catch(error => console.error(error));
   };

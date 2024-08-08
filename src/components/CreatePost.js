@@ -3,13 +3,15 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const CreatePost = () => {
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+  const [name, setName] = useState('');
+  const [user_id, setUser] = useState('');
+  const [category_id, setCategory] = useState('');
+  const [tag_id, setTag] = useState('');
   const history = useNavigate();
 
   const handleCreatePost = () => {
-    axios.post('/api/posts', { title, content })
-      .then(response => history.push('/'))
+    axios.post('http://localhost:8080/api/posts', { name, user_id, category_id, tag_id})
+      .then(response => history('/'))
       .catch(error => console.error(error));
   };
 
@@ -17,15 +19,24 @@ const CreatePost = () => {
     <div>
       <h1>Create Post</h1>
       <input
-        type="text"
-        placeholder="Title"
-        value={title}
-        onChange={e => setTitle(e.target.value)}
+        placeholder="name"
+        value={name}
+        onChange={e => setName(e.target.value)}
       />
       <textarea
-        placeholder="Content"
-        value={content}
-        onChange={e => setContent(e.target.value)}
+        placeholder="User"
+        value={user_id}
+        onChange={e => setUser(e.target.value)}
+      />
+       <input
+        placeholder="Category"
+        value={category_id}
+        onChange={e => setCategory(e.target.value)}
+      />
+      <textarea
+        placeholder="Tag"
+        value={tag_id}
+        onChange={e => setTag(e.target.value)}
       />
       <button onClick={handleCreatePost}>Create</button>
     </div>
